@@ -21,6 +21,7 @@
 		91B01FC6CE37691B3B8A6832 /* DatabaseProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */; };
 		9E77EE903137D8090141CF32 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */; };
 		9F5E73777B7FDFD66A94D755 /* DatabaseProbeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */; };
+		A35A7C4432D553321700CACF /* MenuBarPanelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1068874989EA62B4E7BBF324 /* MenuBarPanelTests.swift */; };
 		A57715B89B6B92A7E1A25EA7 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC676544C48CD305AAE63 /* AppModel.swift */; };
 		C390A3A2536674B1E0EF6C14 /* Sparkle.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8F34EA005C339C496DEF837E /* Sparkle.txt */; };
 		C4761E4C17E46DCC8D8FDFE5 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		0171BBE34FD2FFFAA62A55F8 /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
+		1068874989EA62B4E7BBF324 /* MenuBarPanelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPanelTests.swift; sourceTree = "<group>"; };
 		401FF459517EF532CE1A3AAE /* SSDWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSDWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49AC02F79A0B71C664405757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPanel.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			children = (
 				D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */,
 				9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */,
+				1068874989EA62B4E7BBF324 /* MenuBarPanelTests.swift */,
 			);
 			path = SSDWatcherTests;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			files = (
 				9F5E73777B7FDFD66A94D755 /* DatabaseProbeTests.swift in Sources */,
 				9E77EE903137D8090141CF32 /* DiscoveryTests.swift in Sources */,
+				A35A7C4432D553321700CACF /* MenuBarPanelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +436,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.takhoffman.SSDWatcher;
 				PRODUCT_MODULE_NAME = SSDWatcher;
@@ -453,7 +457,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.takhoffman.SSDWatcher;
 				PRODUCT_MODULE_NAME = SSDWatcher;
