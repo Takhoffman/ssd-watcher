@@ -1,0 +1,585 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CE3FA4693DBDDCF147BEEC5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 717FEC2BA16F517F3408DB8B /* Sparkle */; };
+		11C3A49AF1417675E9EA080D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1446506C47C70575475E78 /* NotificationService.swift */; };
+		19B81FD3F642535728852CF9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */; };
+		1BACA71973F7E62B860A6F8E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38CF77C8B11927E55E9CACA /* SettingsView.swift */; };
+		2855539FF72B722E41D79E36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F1728992C48B32C99082921 /* Assets.xcassets */; };
+		3E65FCB3C56A7F8DE54B463E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD31CCB733B57D68D162B318 /* Models.swift */; };
+		52A9E7AD2912DB6BC067CF3E /* SparklineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0766B9FD6BFE6B0E16FD37 /* SparklineView.swift */; };
+		6A729495AB5B5C398BDCA06A /* SSDWatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD590DE154B32289185852FA /* SSDWatcherApp.swift */; };
+		6E3876F66DF0F071F49C3D80 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4197E6CA0CBD24CDE5E30ED /* DesignSystem.swift */; };
+		845120DACAC045E286695063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA1A58E1F11E44C6DDE98F /* AppDelegate.swift */; };
+		91B01FC6CE37691B3B8A6832 /* DatabaseProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */; };
+		943D71D84FCF924342E5E37D /* CodexHomeDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAB7A5E2E79DE5190E1A9F3 /* CodexHomeDiscovery.swift */; };
+		9E77EE903137D8090141CF32 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */; };
+		9F5E73777B7FDFD66A94D755 /* DatabaseProbeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */; };
+		A57715B89B6B92A7E1A25EA7 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC676544C48CD305AAE63 /* AppModel.swift */; };
+		C4761E4C17E46DCC8D8FDFE5 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */; };
+		D5BDCF35E22FDE626C6C121B /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED5688AE3E55EFD5CFFA3FB /* UpdateService.swift */; };
+		D840BEE393D45254A2E020E7 /* HomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78841140DF5C461B20F4F1D /* HomeCard.swift */; };
+		E12419CD5307F2BE3AA89A8E /* MenuBarPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */; };
+		EB8A47B99297F8F5916B8515 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5F5DD2FD856013A982000AB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9769BBDDADFB04B3E6143F8B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7DDE814C2D48BDE5791D4B21;
+			remoteInfo = SSDWatcher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		401FF459517EF532CE1A3AAE /* SSDWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSDWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49AC02F79A0B71C664405757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPanel.swift; sourceTree = "<group>"; };
+		4D1446506C47C70575475E78 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		65AA1A58E1F11E44C6DDE98F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		945DC676544C48CD305AAE63 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		9F1728992C48B32C99082921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
+		AD31CCB733B57D68D162B318 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B414ECE73AF0CD5065E25430 /* SSDWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSDWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4197E6CA0CBD24CDE5E30ED /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CD0766B9FD6BFE6B0E16FD37 /* SparklineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineView.swift; sourceTree = "<group>"; };
+		CED5688AE3E55EFD5CFFA3FB /* UpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
+		CFAB7A5E2E79DE5190E1A9F3 /* CodexHomeDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexHomeDiscovery.swift; sourceTree = "<group>"; };
+		D38CF77C8B11927E55E9CACA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProbeTests.swift; sourceTree = "<group>"; };
+		D78841140DF5C461B20F4F1D /* HomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCard.swift; sourceTree = "<group>"; };
+		DD590DE154B32289185852FA /* SSDWatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDWatcherApp.swift; sourceTree = "<group>"; };
+		FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProbe.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7868CFC758314E6033189A7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B81FD3F642535728852CF9 /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A80A2EFA6DB3BE86F27F7381 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB8A47B99297F8F5916B8515 /* libsqlite3.tbd in Frameworks */,
+				0CE3FA4693DBDDCF147BEEC5 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1561A30F635A44A5217B5CDB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9F1728992C48B32C99082921 /* Assets.xcassets */,
+				49AC02F79A0B71C664405757 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		23D3E6777211EA60849695EC /* SSDWatcher */ = {
+			isa = PBXGroup;
+			children = (
+				49BC64226F99528F521E53C2 /* App */,
+				FB6D710F69402AF35169EA01 /* Core */,
+				DCC6D3063275B3C769FE80DC /* Design */,
+				1561A30F635A44A5217B5CDB /* Resources */,
+				B53FBF25B79228E74CC226D7 /* Services */,
+				5ECD32C79A0582FBD821A247 /* Views */,
+			);
+			path = SSDWatcher;
+			sourceTree = "<group>";
+		};
+		47F24D9AAC7ECD4C904696B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49BC64226F99528F521E53C2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				65AA1A58E1F11E44C6DDE98F /* AppDelegate.swift */,
+				945DC676544C48CD305AAE63 /* AppModel.swift */,
+				DD590DE154B32289185852FA /* SSDWatcherApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5ECD32C79A0582FBD821A247 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D78841140DF5C461B20F4F1D /* HomeCard.swift */,
+				4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */,
+				5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */,
+				D38CF77C8B11927E55E9CACA /* SettingsView.swift */,
+				CD0766B9FD6BFE6B0E16FD37 /* SparklineView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1D16129E2019E04D3AC584C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B414ECE73AF0CD5065E25430 /* SSDWatcher.app */,
+				401FF459517EF532CE1A3AAE /* SSDWatcherTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B53FBF25B79228E74CC226D7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4D1446506C47C70575475E78 /* NotificationService.swift */,
+				CED5688AE3E55EFD5CFFA3FB /* UpdateService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D06B27C79602FF32C53BFF4E = {
+			isa = PBXGroup;
+			children = (
+				23D3E6777211EA60849695EC /* SSDWatcher */,
+				F044AEEDFB28641C3C5988CF /* SSDWatcherTests */,
+				47F24D9AAC7ECD4C904696B0 /* Frameworks */,
+				A1D16129E2019E04D3AC584C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCC6D3063275B3C769FE80DC /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				B4197E6CA0CBD24CDE5E30ED /* DesignSystem.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		F044AEEDFB28641C3C5988CF /* SSDWatcherTests */ = {
+			isa = PBXGroup;
+			children = (
+				D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */,
+				9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */,
+			);
+			path = SSDWatcherTests;
+			sourceTree = "<group>";
+		};
+		FB6D710F69402AF35169EA01 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CFAB7A5E2E79DE5190E1A9F3 /* CodexHomeDiscovery.swift */,
+				FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */,
+				AD31CCB733B57D68D162B318 /* Models.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2512D42D9C4A5CF866504CE8 /* SSDWatcherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 931FF309FDA530E2EC1C6CC2 /* Build configuration list for PBXNativeTarget "SSDWatcherTests" */;
+			buildPhases = (
+				FBEA46A996EDA0869F9F28BB /* Sources */,
+				7868CFC758314E6033189A7E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E82BD50FB09009D9440D4D7 /* PBXTargetDependency */,
+			);
+			name = SSDWatcherTests;
+			packageProductDependencies = (
+			);
+			productName = SSDWatcherTests;
+			productReference = 401FF459517EF532CE1A3AAE /* SSDWatcherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7DDE814C2D48BDE5791D4B21 /* SSDWatcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70FCF9C91C443B0D6A1F1C53 /* Build configuration list for PBXNativeTarget "SSDWatcher" */;
+			buildPhases = (
+				F527275F1EE16B1F200DA6E7 /* Sources */,
+				33D9E0D83F8D24C74F0AC6F7 /* Resources */,
+				A80A2EFA6DB3BE86F27F7381 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SSDWatcher;
+			packageProductDependencies = (
+				717FEC2BA16F517F3408DB8B /* Sparkle */,
+			);
+			productName = SSDWatcher;
+			productReference = B414ECE73AF0CD5065E25430 /* SSDWatcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9769BBDDADFB04B3E6143F8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 23803C79CC5F24D51367DE13 /* Build configuration list for PBXProject "SSDWatcher" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = D06B27C79602FF32C53BFF4E;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EF2E2CD4AEF0010CEF272F6B /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A1D16129E2019E04D3AC584C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7DDE814C2D48BDE5791D4B21 /* SSDWatcher */,
+				2512D42D9C4A5CF866504CE8 /* SSDWatcherTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		33D9E0D83F8D24C74F0AC6F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2855539FF72B722E41D79E36 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F527275F1EE16B1F200DA6E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				845120DACAC045E286695063 /* AppDelegate.swift in Sources */,
+				A57715B89B6B92A7E1A25EA7 /* AppModel.swift in Sources */,
+				943D71D84FCF924342E5E37D /* CodexHomeDiscovery.swift in Sources */,
+				91B01FC6CE37691B3B8A6832 /* DatabaseProbe.swift in Sources */,
+				6E3876F66DF0F071F49C3D80 /* DesignSystem.swift in Sources */,
+				D840BEE393D45254A2E020E7 /* HomeCard.swift in Sources */,
+				E12419CD5307F2BE3AA89A8E /* MenuBarPanel.swift in Sources */,
+				3E65FCB3C56A7F8DE54B463E /* Models.swift in Sources */,
+				11C3A49AF1417675E9EA080D /* NotificationService.swift in Sources */,
+				C4761E4C17E46DCC8D8FDFE5 /* OnboardingView.swift in Sources */,
+				6A729495AB5B5C398BDCA06A /* SSDWatcherApp.swift in Sources */,
+				1BACA71973F7E62B860A6F8E /* SettingsView.swift in Sources */,
+				52A9E7AD2912DB6BC067CF3E /* SparklineView.swift in Sources */,
+				D5BDCF35E22FDE626C6C121B /* UpdateService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBEA46A996EDA0869F9F28BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F5E73777B7FDFD66A94D755 /* DatabaseProbeTests.swift in Sources */,
+				9E77EE903137D8090141CF32 /* DiscoveryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7E82BD50FB09009D9440D4D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7DDE814C2D48BDE5791D4B21 /* SSDWatcher */;
+			targetProxy = 5F5DD2FD856013A982000AB4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		01194731C49DBC3184B3504B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "arm64 x86_64";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = targeted;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		025E930A24F734596D4EDF61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.takhoffman.SSDWatcherTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SSDWatcher.app/Contents/MacOS/SSDWatcher";
+			};
+			name = Debug;
+		};
+		205C0BC4547DC50C0FE4C30C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SSDWatcher/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.takhoffman.SSDWatcher;
+				PRODUCT_MODULE_NAME = SSDWatcher;
+				PRODUCT_NAME = SSDWatcher;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3338B6CCF37D94A7729E2C14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SSDWatcher/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.takhoffman.SSDWatcher;
+				PRODUCT_MODULE_NAME = SSDWatcher;
+				PRODUCT_NAME = SSDWatcher;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		99841F605F06C3D94FD7E620 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGNING_ALLOWED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.takhoffman.SSDWatcherTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SSDWatcher.app/Contents/MacOS/SSDWatcher";
+			};
+			name = Release;
+		};
+		B6A732C2ED19196A341C7B3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "arm64 x86_64";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = targeted;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23803C79CC5F24D51367DE13 /* Build configuration list for PBXProject "SSDWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01194731C49DBC3184B3504B /* Debug */,
+				B6A732C2ED19196A341C7B3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		70FCF9C91C443B0D6A1F1C53 /* Build configuration list for PBXNativeTarget "SSDWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3338B6CCF37D94A7729E2C14 /* Debug */,
+				205C0BC4547DC50C0FE4C30C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		931FF309FDA530E2EC1C6CC2 /* Build configuration list for PBXNativeTarget "SSDWatcherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				025E930A24F734596D4EDF61 /* Debug */,
+				99841F605F06C3D94FD7E620 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF2E2CD4AEF0010CEF272F6B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		717FEC2BA16F517F3408DB8B /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF2E2CD4AEF0010CEF272F6B /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 9769BBDDADFB04B3E6143F8B /* Project object */;
+}

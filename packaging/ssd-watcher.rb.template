@@ -1,0 +1,24 @@
+cask "ssd-watcher" do
+  version "__VERSION__"
+  sha256 "__SHA256__"
+
+  url "https://github.com/Takhoffman/ssd-watcher/releases/download/v#{version}/SSD-Watcher-#{version}.dmg"
+  name "SSD Watcher"
+  desc "Detect abnormal Codex log writes before they quietly wear storage"
+  homepage "https://github.com/Takhoffman/ssd-watcher"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  auto_updates true
+  depends_on macos: ">= :sonoma"
+
+  app "SSDWatcher.app"
+
+  zap trash: [
+    "~/Library/Preferences/com.takhoffman.SSDWatcher.plist",
+    "~/Library/Saved Application State/com.takhoffman.SSDWatcher.savedState",
+  ]
+end

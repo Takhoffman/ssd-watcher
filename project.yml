@@ -1,0 +1,80 @@
+name: SSDWatcher
+
+options:
+  bundleIdPrefix: com.takhoffman
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    ARCHS: "arm64 x86_64"
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: targeted
+    CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: YES
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGNING_ALLOWED: NO
+    DEAD_CODE_STRIPPING: YES
+
+packages:
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    from: 2.9.2
+
+targets:
+  SSDWatcher:
+    type: application
+    platform: macOS
+    sources:
+      - path: SSDWatcher
+    dependencies:
+      - sdk: libsqlite3.tbd
+      - package: Sparkle
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.takhoffman.SSDWatcher
+        PRODUCT_NAME: SSDWatcher
+        PRODUCT_MODULE_NAME: SSDWatcher
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: SSDWatcher/Resources/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        COMBINE_HIDPI_IMAGES: YES
+      configs:
+        Debug:
+          ONLY_ACTIVE_ARCH: YES
+        Release:
+          CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
+          ONLY_ACTIVE_ARCH: NO
+
+  SSDWatcherTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: SSDWatcherTests
+    dependencies:
+      - target: SSDWatcher
+      - sdk: libsqlite3.tbd
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.takhoffman.SSDWatcherTests
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGNING_ALLOWED: NO
+
+schemes:
+  SSDWatcher:
+    build:
+      targets:
+        SSDWatcher: all
+        SSDWatcherTests:
+          - test
+    test:
+      targets:
+        - SSDWatcherTests
+    run:
+      config: Debug
+    archive:
+      config: Release
