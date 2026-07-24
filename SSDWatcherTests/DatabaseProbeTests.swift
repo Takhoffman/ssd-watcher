@@ -134,6 +134,145 @@ final class DatabaseProbeTests: XCTestCase {
         XCTAssertNil(DatabaseProbe.classify(unrelatedURL))
     }
 
+    func testRecognizesAndSamplesHermesOptionalStores() throws {
+        let memoryURL = temporaryDirectory.appendingPathComponent("memory_store.db")
+        try execute(
+            """
+            CREATE TABLE facts (
+                fact_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                content TEXT NOT NULL UNIQUE
+            );
+            CREATE TABLE entities (
+                entity_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL
+            );
+            CREATE TABLE fact_entities (
+                fact_id INTEGER,
+                entity_id INTEGER,
+                PRIMARY KEY (fact_id, entity_id)
+            );
+            CREATE TABLE memory_banks (
+                bank_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                bank_name TEXT NOT NULL UNIQUE
+            );
+            INSERT INTO facts (content) VALUES ('fixture');
+            """,
+            at: memoryURL
+        )
+
+        let kanbanURL = temporaryDirectory.appendingPathComponent("kanban.db")
+        try execute(
+            """
+            CREATE TABLE tasks (
+                id TEXT PRIMARY KEY,
+                title TEXT NOT NULL,
+                status TEXT NOT NULL
+            );
+            CREATE TABLE task_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                task_id TEXT NOT NULL
+            );
+            CREATE TABLE task_comments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                task_id TEXT NOT NULL
+            );
+            CREATE TABLE task_runs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                task_id TEXT NOT NULL,
+                status TEXT NOT NULL
+            );
+            INSERT INTO tasks VALUES ('task', 'Fixture', 'todo');
+            INSERT INTO task_events (task_id) VALUES ('task');
+            """,
+            at: kanbanURL
+        )
+
+        let projectsURL = temporaryDirectory.appendingPathComponent("projects.db")
+        try execute(
+            """
+            CREATE TABLE projects (
+                id TEXT PRIMARY KEY,
+                slug TEXT NOT NULL UNIQUE,
+                name TEXT NOT NULL
+            );
+            CREATE TABLE project_folders (
+                project_id TEXT NOT NULL,
+                path TEXT NOT NULL,
+                PRIMARY KEY (project_id, path)
+            );
+            CREATE TABLE project_meta (key TEXT PRIMARY KEY, value TEXT);
+            CREATE TABLE discovered_repos (
+                root TEXT PRIMARY KEY,
+                label TEXT,
+                last_seen INTEGER NOT NULL
+            );
+            INSERT INTO projects VALUES ('project', 'fixture', 'Fixture');
+            """,
+            at: projectsURL
+        )
+
+        let executionsURL = temporaryDirectory.appendingPathComponent("executions.db")
+        try execute(
+            """
+            CREATE TABLE executions (
+                id TEXT PRIMARY KEY,
+                job_id TEXT NOT NULL,
+                process_id TEXT NOT NULL,
+                status TEXT NOT NULL,
+                claimed_at TEXT NOT NULL
+            );
+            INSERT INTO executions VALUES ('run', 'job', 'process', 'running', 'now');
+            """,
+            at: executionsURL
+        )
+
+        let verificationURL = temporaryDirectory
+            .appendingPathComponent("verification_evidence.db")
+        try execute(
+            """
+            CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+            CREATE TABLE verification_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id TEXT NOT NULL,
+                canonical_command TEXT NOT NULL,
+                status TEXT NOT NULL
+            );
+            CREATE TABLE verification_state (
+                session_id TEXT NOT NULL,
+                root TEXT NOT NULL,
+                PRIMARY KEY (session_id, root)
+            );
+            INSERT INTO verification_events
+                (session_id, canonical_command, status)
+                VALUES ('session', 'swift test', 'passed');
+            """,
+            at: verificationURL
+        )
+
+        let targets = [
+            DatabaseTarget(url: memoryURL, kind: .hermesMemory),
+            DatabaseTarget(url: kanbanURL, kind: .hermesKanban),
+            DatabaseTarget(url: projectsURL, kind: .hermesProjects),
+            DatabaseTarget(url: executionsURL, kind: .hermesExecutions),
+            DatabaseTarget(url: verificationURL, kind: .hermesVerification),
+        ]
+
+        for target in targets {
+            XCTAssertEqual(DatabaseProbe.classify(target.url), target.kind)
+        }
+
+        let candidate = StorageCandidate(
+            product: .hermes,
+            rootURL: temporaryDirectory,
+            databases: targets,
+            evidence: [.validatedDatabase],
+            confidence: 0.8
+        )
+        let sample = try XCTUnwrap(DatabaseProbe.sample(candidate: candidate))
+        XCTAssertEqual(sample.activityCounter, 5)
+        XCTAssertGreaterThan(sample.totalBytes, 0)
+    }
+
     func testRecognizesLegacyOpenClawMemoryIndex() throws {
         let databaseURL = temporaryDirectory.appendingPathComponent("main.sqlite")
         try execute(

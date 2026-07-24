@@ -137,7 +137,7 @@ struct SettingsView: View {
             } header: {
                 Text("Additional locations")
             } footer: {
-                Text("Automatic discovery recognizes Codex, OpenClaw, and Hermes database structures, live processes, profiles, your home folder, and mounted local drives. Add a folder only if it is still missed.")
+                Text("Automatic discovery recognizes Codex, OpenClaw, and Hermes database structures, live processes, profiles, your home folder, and mounted local drives. It checks again every five minutes; add a folder only if it is still missed.")
             }
         }
         .formStyle(.grouped)

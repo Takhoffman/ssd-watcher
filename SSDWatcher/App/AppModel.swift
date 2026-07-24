@@ -53,9 +53,11 @@ final class AppModel: ObservableObject {
     private let notificationService = NotificationService()
     private let updateService = UpdateService()
     private var timer: Timer?
+    private var isSampling = false
     private var previousSamples: [String: DatabaseSample] = [:]
     private var histories: [String: [RatePoint]] = [:]
     private var previousHealth: [String: HealthLevel] = [:]
+    private static let automaticRediscoveryInterval: TimeInterval = 5 * 60
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -108,6 +110,8 @@ final class AppModel: ObservableObject {
             scan()
             return
         }
+        guard !isSampling else { return }
+        isSampling = true
 
         let candidates = locations.map(\.candidate)
         DispatchQueue.global(qos: .utility).async {
@@ -119,7 +123,9 @@ final class AppModel: ObservableObject {
             }
 
             DispatchQueue.main.async { [weak self] in
-                self?.apply(samples: Dictionary(uniqueKeysWithValues: samples))
+                guard let self else { return }
+                self.apply(samples: Dictionary(uniqueKeysWithValues: samples))
+                self.isSampling = false
             }
         }
     }
@@ -202,10 +208,19 @@ final class AppModel: ObservableObject {
         guard scanInterval > 0 else { return }
         timer = Timer.scheduledTimer(withTimeInterval: scanInterval, repeats: true) { [weak self] _ in
             Task { @MainActor in
-                self?.sampleNow()
+                self?.performScheduledCheck()
             }
         }
         timer?.tolerance = min(2, scanInterval * 0.15)
+    }
+
+    private func performScheduledCheck() {
+        if let lastScan,
+           Date().timeIntervalSince(lastScan) >= Self.automaticRediscoveryInterval {
+            scan()
+        } else {
+            sampleNow()
+        }
     }
 
     private func mergeInitialSnapshots(_ snapshots: [MonitoredLocation]) {
@@ -213,13 +228,23 @@ final class AppModel: ObservableObject {
 
         for var location in snapshots {
             if let existing = locations.first(where: { $0.id == location.id }) {
-                location.metrics = existing.metrics
-                location.history = existing.history
-            } else if let sample = DatabaseProbe.sample(candidate: location.candidate) {
-                previousSamples[location.id] = sample
+                if existing.candidate.databases == location.candidate.databases {
+                    location.metrics = existing.metrics
+                    location.health = existing.health
+                    location.history = existing.history
+                } else {
+                    resetBaseline(for: location)
+                }
+            } else {
+                resetBaseline(for: location)
             }
             updated.append(location)
         }
+
+        let activeIDs = Set(updated.map(\.id))
+        previousSamples = previousSamples.filter { activeIDs.contains($0.key) }
+        previousHealth = previousHealth.filter { activeIDs.contains($0.key) }
+        histories = histories.filter { activeIDs.contains($0.key) }
 
         locations = updated.sorted {
             if $0.health != $1.health { return $0.health > $1.health }
@@ -229,6 +254,16 @@ final class AppModel: ObservableObject {
             return $0.displayName.localizedStandardCompare($1.displayName) == .orderedAscending
         }
         sampleNow()
+    }
+
+    private func resetBaseline(for location: MonitoredLocation) {
+        previousSamples[location.id] = DatabaseSample(
+            timestamp: location.metrics.lastUpdated,
+            activityCounter: location.metrics.activityCounter,
+            totalBytes: location.metrics.totalBytes
+        )
+        previousHealth[location.id] = .unknown
+        histories[location.id] = []
     }
 
     private func apply(samples: [String: DatabaseSample]) {

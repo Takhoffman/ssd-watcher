@@ -14,10 +14,10 @@ fi
 team_id=${DEVELOPMENT_TEAM:-KF4GF4J4K9}
 signing_identity=${DEVELOPER_ID_APPLICATION:-Developer ID Application: Takayuki Hoffman (KF4GF4J4K9)}
 notary_profile=${NOTARYTOOL_PROFILE:-SSDWatcherNotary}
-build_number=${BUILD_NUMBER:-${version%%[-+]*}}
+build_number=${BUILD_NUMBER:-$(git -C "$repo_root" rev-list --count HEAD)}
 derived_data=${SSD_WATCHER_DERIVED_DATA:-/tmp/SSDWatcherReleaseDerivedData}
-archive_path="$derived_data/SSDWatcher.xcarchive"
-export_path="$derived_data/Export"
+archive_path="$derived_data/SSDWatcher-$version.xcarchive"
+export_path="$derived_data/Export-$version"
 dist_path="$repo_root/dist"
 temporary_path=$(mktemp -d "${TMPDIR:-/tmp}/ssd-watcher-release.XXXXXX")
 
@@ -27,6 +27,9 @@ cleanup() {
 trap cleanup EXIT
 
 cd "$repo_root"
+"$repo_root/scripts/check-release.sh" "$version"
+
+rm -rf "$archive_path" "$export_path"
 xcodegen generate
 
 xcodebuild archive \
@@ -57,6 +60,26 @@ fi
 
 codesign --verify --deep --strict --verbose=2 "$app_path"
 
+bundle_version=$(
+    /usr/libexec/PlistBuddy \
+        -c "Print :CFBundleShortVersionString" \
+        "$app_path/Contents/Info.plist"
+)
+bundle_build=$(
+    /usr/libexec/PlistBuddy \
+        -c "Print :CFBundleVersion" \
+        "$app_path/Contents/Info.plist"
+)
+[[ $bundle_version == "$version" ]] || {
+    print -u2 "Exported version $bundle_version does not match $version"
+    exit 1
+}
+[[ $bundle_build == "$build_number" ]] || {
+    print -u2 "Exported build $bundle_build does not match $build_number"
+    exit 1
+}
+lipo -verify_arch arm64 x86_64 "$app_path/Contents/MacOS/SSDWatcher"
+
 mkdir -p "$dist_path"
 find "$dist_path" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
 
@@ -85,6 +108,11 @@ hdiutil create \
     -format UDZO \
     -ov \
     "$dmg_path"
+codesign --force \
+    --sign "$signing_identity" \
+    --timestamp \
+    "$dmg_path"
+codesign --verify --strict --verbose=2 "$dmg_path"
 xcrun notarytool submit "$dmg_path" \
     --keychain-profile "$notary_profile" \
     --wait
@@ -108,10 +136,19 @@ appcast_arguments=(
     -o appcast.xml
 )
 if [[ -n ${SPARKLE_PRIVATE_KEY_FILE:-} ]]; then
-    appcast_arguments+=(--ed-key-file "$SPARKLE_PRIVATE_KEY_FILE")
+    [[ -r $SPARKLE_PRIVATE_KEY_FILE ]] || {
+        print -u2 "SPARKLE_PRIVATE_KEY_FILE is not readable"
+        exit 1
+    }
+    appcast_arguments+=(--ed-key-file -)
+    "$sparkle_tools/generate_appcast" \
+        "${appcast_arguments[@]}" \
+        "$update_source" \
+        < "$SPARKLE_PRIVATE_KEY_FILE"
+else
+    "$sparkle_tools/generate_appcast" "${appcast_arguments[@]}" "$update_source"
 fi
 
-"$sparkle_tools/generate_appcast" "${appcast_arguments[@]}" "$update_source"
 cp "$update_source/appcast.xml" "$dist_path/appcast.xml"
 
 mkdir -p "$dist_path/Casks"
@@ -119,7 +156,12 @@ mkdir -p "$dist_path/Casks"
 
 (
     cd "$dist_path"
-    shasum -a 256 "$dmg_name" "$zip_name" appcast.xml > SHA256SUMS
+    shasum -a 256 \
+        "$dmg_name" \
+        "$zip_name" \
+        appcast.xml \
+        Casks/ssd-watcher.rb \
+        > SHA256SUMS
 )
 
 spctl --assess --type execute --verbose=2 "$app_path"

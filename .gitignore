@@ -1,6 +1,7 @@
 .DS_Store
 .build/
 build/
+dist/
 DerivedData/
 *.xcarchive
 *.dmg
@@ -10,3 +11,6 @@ xcuserdata/
 *.xcuserstate
 Signing.local.xcconfig
 .swiftpm/
+*.keychain-db
+*.p8
+*.p12

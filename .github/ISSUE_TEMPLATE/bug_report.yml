@@ -1,0 +1,76 @@
+name: Bug report
+description: Report behavior that is incorrect, confusing, or unreliable.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve SSD Watcher. Please remove usernames,
+        database contents, credentials, and other private data from anything
+        you share.
+  - type: input
+    id: version
+    attributes:
+      label: SSD Watcher version
+      description: Find this in Settings → Privacy.
+      placeholder: 0.1.0 (1)
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and Mac
+      placeholder: macOS 15.5, Apple silicon
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installation method
+      options:
+        - GitHub DMG
+        - Homebrew Cask
+        - Built from source
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: product
+    attributes:
+      label: Affected agent tool
+      options:
+        - Codex
+        - OpenClaw
+        - Hermes
+        - Multiple or not sure
+        - SSD Watcher itself
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Tell us what you did in the smallest repeatable sequence.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I reviewed this report and removed prompts, responses, credentials, database files, and private path information.
+          required: true

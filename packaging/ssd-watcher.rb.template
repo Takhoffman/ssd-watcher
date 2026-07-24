@@ -4,7 +4,7 @@ cask "ssd-watcher" do
 
   url "https://github.com/Takhoffman/ssd-watcher/releases/download/v#{version}/SSD-Watcher-#{version}.dmg"
   name "SSD Watcher"
-  desc "Detect abnormal Codex log writes before they quietly wear storage"
+  desc "Watch agent databases for abnormal SSD write activity"
   homepage "https://github.com/Takhoffman/ssd-watcher"
 
   livecheck do
@@ -18,6 +18,8 @@ cask "ssd-watcher" do
   app "SSDWatcher.app"
 
   zap trash: [
+    "~/Library/Application Support/com.takhoffman.SSDWatcher",
+    "~/Library/Caches/com.takhoffman.SSDWatcher",
     "~/Library/Preferences/com.takhoffman.SSDWatcher.plist",
     "~/Library/Saved Application State/com.takhoffman.SSDWatcher.savedState",
   ]
