@@ -34,8 +34,7 @@ rate is also elevated, even when a reliable record counter is unavailable.
 
 ## Install
 
-After the first public release, either familiar Mac installation path will
-work:
+Use either familiar Mac installation path:
 
 1. Download the signed and notarized DMG from
    [GitHub Releases](https://github.com/Takhoffman/ssd-watcher/releases), drag
@@ -48,9 +47,6 @@ work:
 
 DMG installations update securely inside the app. Homebrew users can also run
 `brew upgrade --cask ssd-watcher`.
-
-The repository is currently being prepared for its first `0.1.0` release, so
-the links above will become active when that release is published.
 
 ## Product principles
 
@@ -123,7 +119,7 @@ See the complete [privacy explanation](docs/PRIVACY.md) and
 
 ## Distribution
 
-Public releases will use the same signed and notarized app bundle for:
+Public releases use the same signed and notarized app bundle for:
 
 - A DMG from GitHub Releases, with secure in-app updates powered by Sparkle.
 - A Homebrew Cask for `brew install --cask ssd-watcher`.

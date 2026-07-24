@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct MenuBarPanel: View {
+    static let preferredSize = CGSize(width: 390, height: 640)
+
     @ObservedObject var model: AppModel
 
     var body: some View {
@@ -11,7 +13,10 @@ struct MenuBarPanel: View {
                 OnboardingView(model: model)
             }
         }
-        .frame(width: 390)
+        .frame(
+            width: Self.preferredSize.width,
+            height: Self.preferredSize.height
+        )
         .background(.ultraThinMaterial)
     }
 

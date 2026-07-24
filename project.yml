@@ -37,7 +37,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.takhoffman.SSDWatcher
         PRODUCT_NAME: SSDWatcher
         PRODUCT_MODULE_NAME: SSDWatcher
-        MARKETING_VERSION: 0.1.0
+        MARKETING_VERSION: 0.1.1
         CURRENT_PROJECT_VERSION: 1
         GENERATE_INFOPLIST_FILE: NO
         INFOPLIST_FILE: SSDWatcher/Resources/Info.plist
