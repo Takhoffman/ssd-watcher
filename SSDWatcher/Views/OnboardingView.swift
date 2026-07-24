@@ -58,8 +58,8 @@ struct OnboardingView: View {
         VStack(spacing: 10) {
             BenefitRow(
                 icon: "magnifyingglass",
-                title: "Finds custom locations",
-                detail: "Uses verified database structure and live activity—not one folder name."
+                title: "Finds your agent data",
+                detail: "Recognizes Codex, OpenClaw, and Hermes—even with profiles, custom homes, or renamed folders."
             )
             BenefitRow(
                 icon: "bell.badge",
@@ -80,8 +80,14 @@ struct OnboardingView: View {
                 ProgressView()
                     .controlSize(.small)
             } else {
-                Image(systemName: model.homes.isEmpty ? "folder.badge.questionmark" : "checkmark.circle.fill")
-                    .foregroundStyle(model.homes.isEmpty ? .secondary : DesignSystem.Colors.healthy)
+                Image(
+                    systemName: model.locations.isEmpty
+                        ? "folder.badge.questionmark"
+                        : "checkmark.circle.fill"
+                )
+                .foregroundStyle(
+                    model.locations.isEmpty ? .secondary : DesignSystem.Colors.healthy
+                )
             }
 
             VStack(alignment: .leading, spacing: 2) {
@@ -126,15 +132,16 @@ struct OnboardingView: View {
     }
 
     private var discoveryTitle: String {
-        if model.isScanning { return "Looking for Codex homes…" }
-        if model.homes.isEmpty { return "No Codex homes found yet" }
-        return "Found \(model.homes.count) \(model.homes.count == 1 ? "Codex home" : "Codex homes")"
+        if model.isScanning { return "Looking for agent data stores…" }
+        if model.locations.isEmpty { return "No supported databases found yet" }
+        return "Found \(model.locations.count) \(model.locations.count == 1 ? "location" : "locations")"
     }
 
     private var discoveryDetail: String {
         if model.isScanning { return "Checking filenames, database schemas, and live processes." }
-        if model.homes.isEmpty { return "You can add a custom location now or rescan later." }
-        return "Each location was validated before being added."
+        if model.locations.isEmpty { return "You can add a data folder now or rescan later." }
+        let products = model.monitoredProductCount
+        return "Validated across \(products) supported \(products == 1 ? "tool" : "tools")."
     }
 }
 

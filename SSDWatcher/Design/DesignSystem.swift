@@ -54,10 +54,10 @@ enum Formatters {
         bytes.string(fromByteCount: value)
     }
 
-    static func rate(_ value: Double) -> String {
+    static func recordRate(_ value: Double) -> String {
         if value < 0.05 { return "Idle" }
-        if value < 10 { return String(format: "%.1f inserts/s", value) }
-        return String(format: "%.0f inserts/s", value)
+        if value < 10 { return String(format: "%.1f records/s", value) }
+        return String(format: "%.0f records/s", value)
     }
 
     static func byteRate(_ value: Double) -> String {

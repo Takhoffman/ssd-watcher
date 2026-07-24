@@ -21,7 +21,7 @@ struct MenuBarPanel: View {
                 VStack(spacing: DesignSystem.Spacing.roomy) {
                     StatusHeader(model: model)
                     metrics
-                    homeSection
+                    locationSection
                 }
                 .padding(DesignSystem.Spacing.roomy)
             }
@@ -36,14 +36,14 @@ struct MenuBarPanel: View {
         HStack(spacing: DesignSystem.Spacing.compact) {
             MetricTile(
                 title: "MONITORED",
-                value: "\(model.homes.count)",
-                detail: model.homes.count == 1 ? "Codex home" : "Codex homes",
+                value: "\(model.locations.count)",
+                detail: productDetail,
                 systemImage: "folder.badge.gearshape"
             )
             MetricTile(
-                title: "LOG STORAGE",
+                title: "DATABASES",
                 value: Formatters.byteCount(model.totalDatabaseBytes),
-                detail: "Across all homes",
+                detail: "Recognized storage",
                 systemImage: "cylinder.split.1x2"
             )
             MetricTile(
@@ -55,11 +55,16 @@ struct MenuBarPanel: View {
         }
     }
 
+    private var productDetail: String {
+        let count = model.monitoredProductCount
+        return count == 1 ? "1 agent tool" : "\(count) agent tools"
+    }
+
     @ViewBuilder
-    private var homeSection: some View {
+    private var locationSection: some View {
         VStack(alignment: .leading, spacing: DesignSystem.Spacing.standard) {
             HStack {
-                Text("CODEX HOMES")
+                Text("WATCHED LOCATIONS")
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                     .tracking(0.8)
@@ -78,21 +83,21 @@ struct MenuBarPanel: View {
                     .buttonStyle(.plain)
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                    .help("Discover Codex homes again")
+                    .help("Discover agent data stores again")
                 }
             }
 
-            if model.homes.isEmpty {
+            if model.locations.isEmpty {
                 EmptyHomesView(
                     isScanning: model.isScanning,
                     addFolder: model.chooseCustomHome,
                     rescan: model.scan
                 )
             } else {
-                ForEach(model.homes) { home in
-                    HomeCard(
-                        home: home,
-                        reveal: { model.reveal(home) }
+                ForEach(model.locations) { location in
+                    LocationCard(
+                        location: location,
+                        reveal: { model.reveal(location) }
                     )
                 }
             }
@@ -165,14 +170,16 @@ private struct StatusHeader: View {
     }
 
     private var statusDetail: String {
-        if model.homes.isEmpty {
-            return model.isScanning ? "Looking for Codex homes…" : "No Codex databases found yet."
+        if model.locations.isEmpty {
+            return model.isScanning
+                ? "Looking for supported data stores…"
+                : "No supported databases found yet."
         }
         if model.overallHealth == .healthy {
-            if model.activeHomeCount == 0 {
+            if model.activeLocationCount == 0 {
                 return "No active database writes detected."
             }
-            return "Monitoring \(model.homes.count) homes for unusual activity."
+            return "Monitoring \(model.locations.count) locations for unusual activity."
         }
         return model.overallHealth.message
     }
@@ -253,9 +260,15 @@ private struct EmptyHomesView: View {
                 .foregroundStyle(.secondary)
 
             VStack(spacing: 4) {
-                Text(isScanning ? "Searching for Codex homes" : "No Codex homes found")
+                Text(
+                    isScanning
+                        ? "Searching for agent data"
+                        : "No supported databases found"
+                )
                     .font(.headline)
-                Text("SSD Watcher validates database structure, so renamed and custom locations are supported.")
+                Text(
+                    "SSD Watcher recognizes Codex, OpenClaw, and Hermes by database structure, even in renamed or custom locations."
+                )
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)

@@ -61,7 +61,7 @@ struct SettingsView: View {
                     }
                 }
 
-                Button("Scan for Codex homes now") {
+                Button("Scan for agent data now") {
                     model.scan()
                 }
                 .disabled(model.isScanning)
@@ -81,11 +81,11 @@ struct SettingsView: View {
                     HStack(spacing: 6) {
                         TextField(
                             "Rate",
-                            value: $model.warningInsertRate,
+                            value: $model.warningRecordRate,
                             format: .number.precision(.fractionLength(0))
                         )
                         .frame(width: 72)
-                        Text("inserts/s")
+                        Text("records/s")
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -94,18 +94,18 @@ struct SettingsView: View {
                     HStack(spacing: 6) {
                         TextField(
                             "Rate",
-                            value: $model.criticalInsertRate,
+                            value: $model.criticalRecordRate,
                             format: .number.precision(.fractionLength(0))
                         )
                         .frame(width: 72)
-                        Text("inserts/s")
+                        Text("records/s")
                             .foregroundStyle(.secondary)
                     }
                 }
             } header: {
                 Text("Thresholds")
             } footer: {
-                Text("Defaults are intentionally far above normal Codex activity and well below the reported runaway-log rate.")
+                Text("Defaults are intentionally far above normal append activity. Database growth of 1 MB/s also triggers an elevated warning, even when a record counter is unavailable.")
             }
 
             Section {
@@ -137,7 +137,7 @@ struct SettingsView: View {
             } header: {
                 Text("Additional locations")
             } footer: {
-                Text("Automatic discovery uses Codex markers, live process evidence, and Spotlight on your home folder and mounted local drives. Add a location only if it still cannot be found.")
+                Text("Automatic discovery recognizes Codex, OpenClaw, and Hermes database structures, live processes, profiles, your home folder, and mounted local drives. Add a folder only if it is still missed.")
             }
         }
         .formStyle(.grouped)
@@ -164,7 +164,7 @@ struct SettingsView: View {
             PrivacyRow(
                 icon: "trash.slash",
                 title: "What it never changes",
-                detail: "SSD Watcher does not delete databases, stop processes, or modify Codex configuration."
+                detail: "SSD Watcher does not delete databases, stop processes, or modify agent configuration."
             )
 
             Spacer()

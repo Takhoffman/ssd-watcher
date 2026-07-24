@@ -1,28 +1,30 @@
 # SSD Watcher
 
-![SSD Watcher monitors several Codex database locations and protects an SSD from abnormal write activity](docs/images/ssd-watcher-hero.png)
+![SSD Watcher monitors several agent database locations and protects an SSD from abnormal write activity](docs/images/ssd-watcher-hero.png)
 
 SSD Watcher is a native macOS menu-bar utility that detects abnormal disk-write
 activity before it quietly consumes storage endurance.
 
-The first detector focuses on Codex feedback databases. It finds default,
-custom, renamed, external-volume, and active `CODEX_HOME` locations using
-database fingerprints, Codex markers, Spotlight, and runtime evidence rather
-than relying on one folder name.
+It recognizes Codex, OpenClaw, and Hermes data stores by their SQLite structure.
+Default homes, named profiles, custom homes, renamed folders, external volumes,
+and databases held open by live processes are all supported. Discovery never
+depends on one hard-coded folder name.
 
 ## What it does
 
-- Discovers Codex homes automatically, including several homes on one Mac.
+- Discovers Codex, OpenClaw, and Hermes locations automatically, including
+  several homes or profiles on one Mac.
 - Verifies SQLite schemas before monitoring a candidate.
-- Samples insert counters and on-disk growth without reading log content.
+- Samples append-only record counters and on-disk growth without reading
+  message or log content.
 - Shows live rates, storage totals, health, and short activity history.
 - Sends a native notification when activity becomes abnormally high.
 - Supports launch at login and secure in-app updates.
 
-Normal Codex activity is usually far below SSD Watcher's default thresholds.
-The defaults are intentionally conservative: 100 inserts/second is elevated
-and 1,000 inserts/second is critical. A 1 MB/second database-growth rate is
-also elevated, even when insert counters are unavailable.
+Normal agent activity is usually far below SSD Watcher's default thresholds.
+The defaults are intentionally conservative: 100 new records/second is
+elevated and 1,000 records/second is critical. A 1 MB/second database-growth
+rate is also elevated, even when a reliable record counter is unavailable.
 
 ## Install
 
@@ -81,16 +83,24 @@ opens normally in Xcode. `project.yml` remains the source of truth.
 SSD Watcher uses a layered discovery strategy:
 
 - known default locations and likely profile containers;
-- Codex configuration, session, skill, and rule markers;
-- open database files held by live Codex processes;
+- Codex, OpenClaw, and Hermes configuration and data markers;
+- open database files held by live agent processes;
 - Spotlight filename matches in the home folder and mounted local drives;
 - a strict SQLite schema fingerprint; and
 - folders added manually by the user.
 
-It reads only paths, database schemas, SQLite sequence counters, file sizes, and
+Recognized layouts include:
+
+| Tool | Canonical stores |
+| --- | --- |
+| Codex | `logs_<n>.sqlite` in each Codex home |
+| OpenClaw | `state/openclaw.sqlite` plus `agents/<id>/agent/openclaw-agent.sqlite` |
+| Hermes | Per-profile `state.db`, optional `memory_store.db`, `projects.db`, `verification_evidence.db`, cron execution stores, and Kanban board databases |
+
+It reads only paths, database schemas, record counters, file sizes, and
 timestamps. It never reads prompt or response text, authentication files, or
 credentials. It does not send analytics or anonymous system profiles. It never
-deletes a database or terminates Codex automatically.
+deletes a database or terminates an agent process automatically.
 
 ## Distribution
 

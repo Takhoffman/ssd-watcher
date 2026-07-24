@@ -57,48 +57,122 @@ enum HealthLevel: Int, Comparable, Codable, CaseIterable {
     }
 }
 
+enum StorageProduct: String, Codable, Hashable, CaseIterable {
+    case codex
+    case openClaw
+    case hermes
+
+    var displayName: String {
+        switch self {
+        case .codex: "Codex"
+        case .openClaw: "OpenClaw"
+        case .hermes: "Hermes"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .codex: "terminal"
+        case .openClaw: "pawprint.fill"
+        case .hermes: "wing"
+        }
+    }
+}
+
+enum DatabaseKind: String, Codable, Hashable {
+    case codexLog
+    case openClawGlobal
+    case openClawAgent
+    case openClawLegacyMemory
+    case hermesState
+    case hermesMemory
+    case hermesKanban
+    case hermesProjects
+    case hermesExecutions
+    case hermesVerification
+
+    var product: StorageProduct {
+        switch self {
+        case .codexLog:
+            .codex
+        case .openClawGlobal, .openClawAgent, .openClawLegacyMemory:
+            .openClaw
+        case .hermesState, .hermesMemory, .hermesKanban, .hermesProjects,
+             .hermesExecutions, .hermesVerification:
+            .hermes
+        }
+    }
+
+    var displayName: String {
+        switch self {
+        case .codexLog: "Feedback log"
+        case .openClawGlobal: "Shared state"
+        case .openClawAgent: "Agent state"
+        case .openClawLegacyMemory: "Legacy memory index"
+        case .hermesState: "Sessions"
+        case .hermesMemory: "Holographic memory"
+        case .hermesKanban: "Kanban board"
+        case .hermesProjects: "Projects"
+        case .hermesExecutions: "Cron executions"
+        case .hermesVerification: "Verification evidence"
+        }
+    }
+}
+
+struct DatabaseTarget: Identifiable, Hashable {
+    let url: URL
+    let kind: DatabaseKind
+
+    var id: String { url.standardizedFileURL.path }
+}
+
 enum DiscoveryEvidence: String, Codable, Hashable, CaseIterable {
     case validatedDatabase
-    case liveCodexProcess
+    case liveProcess
     case configuration
     case sessions
-    case skillsOrRules
+    case productFiles
     case matchingFilename
     case explicitSelection
 
-    var label: String {
+    func label(for product: StorageProduct) -> String {
         switch self {
-        case .validatedDatabase: "Verified Codex database"
-        case .liveCodexProcess: "Open in a Codex process"
-        case .configuration: "Codex configuration"
+        case .validatedDatabase: "Verified \(product.displayName) database"
+        case .liveProcess: "Open in a live \(product.displayName) process"
+        case .configuration: "\(product.displayName) configuration"
         case .sessions: "Session history"
-        case .skillsOrRules: "Skills or rules"
+        case .productFiles: "\(product.displayName) data files"
         case .matchingFilename: "Matching database filename"
         case .explicitSelection: "Added by you"
         }
     }
 }
 
-struct HomeCandidate: Identifiable, Hashable {
+struct StorageCandidate: Identifiable, Hashable {
+    let product: StorageProduct
     let rootURL: URL
-    let databaseURLs: [URL]
+    let databases: [DatabaseTarget]
     let evidence: Set<DiscoveryEvidence>
     let confidence: Double
 
-    var id: String { rootURL.standardizedFileURL.path }
+    var id: String { "\(product.rawValue):\(rootURL.standardizedFileURL.path)" }
 
     var primaryDatabase: URL {
-        databaseURLs.max { lhs, rhs in
-            let leftDate = (try? lhs.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
-            let rightDate = (try? rhs.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
+        databases.max { lhs, rhs in
+            let leftDate = (try? lhs.url.resourceValues(
+                forKeys: [.contentModificationDateKey]
+            ).contentModificationDate) ?? .distantPast
+            let rightDate = (try? rhs.url.resourceValues(
+                forKeys: [.contentModificationDateKey]
+            ).contentModificationDate) ?? .distantPast
             return leftDate < rightDate
-        } ?? rootURL.appendingPathComponent("logs_2.sqlite")
+        }?.url ?? rootURL
     }
 }
 
 struct DatabaseSample: Equatable {
     let timestamp: Date
-    let sequence: Int64
+    let activityCounter: Int64
     let totalBytes: Int64
 }
 
@@ -108,31 +182,36 @@ struct RatePoint: Identifiable, Equatable {
     let value: Double
 }
 
-struct HomeMetrics: Equatable {
-    var sequence: Int64
+struct LocationMetrics: Equatable {
+    var activityCounter: Int64
     var totalBytes: Int64
-    var insertRate: Double
+    var recordRate: Double
     var growthBytesPerSecond: Double
     var lastUpdated: Date
 
-    static func initial(sample: DatabaseSample) -> HomeMetrics {
-        HomeMetrics(
-            sequence: sample.sequence,
+    static func initial(sample: DatabaseSample) -> LocationMetrics {
+        LocationMetrics(
+            activityCounter: sample.activityCounter,
             totalBytes: sample.totalBytes,
-            insertRate: 0,
+            recordRate: 0,
             growthBytesPerSecond: 0,
             lastUpdated: sample.timestamp
         )
     }
 }
 
-struct MonitoredHome: Identifiable, Equatable {
-    let candidate: HomeCandidate
-    var metrics: HomeMetrics
+struct MonitoredLocation: Identifiable, Equatable {
+    let candidate: StorageCandidate
+    var metrics: LocationMetrics
     var health: HealthLevel
     var history: [RatePoint]
 
-    init(candidate: HomeCandidate, metrics: HomeMetrics, health: HealthLevel = .unknown, history: [RatePoint] = []) {
+    init(
+        candidate: StorageCandidate,
+        metrics: LocationMetrics,
+        health: HealthLevel = .unknown,
+        history: [RatePoint] = []
+    ) {
         self.candidate = candidate
         self.metrics = metrics
         self.health = health
@@ -143,10 +222,20 @@ struct MonitoredHome: Identifiable, Equatable {
 
     var displayName: String {
         let name = candidate.rootURL.lastPathComponent
-        if name == ".codex" { return "Default Codex" }
-        return name.replacingOccurrences(of: ".codex-", with: "")
-            .replacingOccurrences(of: "-", with: " ")
-            .capitalized
+        switch candidate.product {
+        case .codex:
+            if name == ".codex" { return "Default Codex" }
+            return cleaned(name, prefixes: [".codex-", "codex-"])
+        case .openClaw:
+            if name == ".openclaw" || name == ".clawdbot" { return "Default OpenClaw" }
+            return cleaned(name, prefixes: [".openclaw-", "openclaw-", ".clawdbot-"])
+        case .hermes:
+            if name == ".hermes" { return "Default Hermes" }
+            if candidate.rootURL.deletingLastPathComponent().lastPathComponent == "profiles" {
+                return "\(cleaned(name, prefixes: [])) profile"
+            }
+            return cleaned(name, prefixes: [".hermes-", "hermes-"])
+        }
     }
 
     var path: String {
@@ -165,19 +254,32 @@ struct MonitoredHome: Identifiable, Equatable {
         default: "Probable"
         }
     }
+
+    private func cleaned(_ name: String, prefixes: [String]) -> String {
+        var result = name
+        for prefix in prefixes where result.lowercased().hasPrefix(prefix) {
+            result.removeFirst(prefix.count)
+            break
+        }
+        result = result
+            .trimmingCharacters(in: CharacterSet(charactersIn: ".-_ "))
+            .replacingOccurrences(of: "-", with: " ")
+            .replacingOccurrences(of: "_", with: " ")
+        return result.isEmpty ? candidate.product.displayName : result.capitalized
+    }
 }
 
 enum HealthClassifier {
     static func classify(
-        insertRate: Double,
+        recordRate: Double,
         growthBytesPerSecond: Double,
-        warningInsertRate: Double,
-        criticalInsertRate: Double
+        warningRecordRate: Double,
+        criticalRecordRate: Double
     ) -> HealthLevel {
-        if insertRate >= criticalInsertRate || growthBytesPerSecond >= 10 * 1_024 * 1_024 {
+        if recordRate >= criticalRecordRate || growthBytesPerSecond >= 10 * 1_024 * 1_024 {
             return .critical
         }
-        if insertRate >= warningInsertRate || growthBytesPerSecond >= 1 * 1_024 * 1_024 {
+        if recordRate >= warningRecordRate || growthBytesPerSecond >= 1 * 1_024 * 1_024 {
             return .elevated
         }
         return .healthy

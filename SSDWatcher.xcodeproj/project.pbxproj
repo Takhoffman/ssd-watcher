@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0CE3FA4693DBDDCF147BEEC5 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 717FEC2BA16F517F3408DB8B /* Sparkle */; };
 		11C3A49AF1417675E9EA080D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1446506C47C70575475E78 /* NotificationService.swift */; };
+		1978411BD7C9D0EF75F733C7 /* StorageDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956E64C84FB2E8E97768B2C9 /* StorageDiscovery.swift */; };
 		19B81FD3F642535728852CF9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */; };
 		1BACA71973F7E62B860A6F8E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38CF77C8B11927E55E9CACA /* SettingsView.swift */; };
 		2855539FF72B722E41D79E36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F1728992C48B32C99082921 /* Assets.xcassets */; };
@@ -18,13 +19,12 @@
 		6E3876F66DF0F071F49C3D80 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4197E6CA0CBD24CDE5E30ED /* DesignSystem.swift */; };
 		845120DACAC045E286695063 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA1A58E1F11E44C6DDE98F /* AppDelegate.swift */; };
 		91B01FC6CE37691B3B8A6832 /* DatabaseProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */; };
-		943D71D84FCF924342E5E37D /* CodexHomeDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAB7A5E2E79DE5190E1A9F3 /* CodexHomeDiscovery.swift */; };
 		9E77EE903137D8090141CF32 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */; };
 		9F5E73777B7FDFD66A94D755 /* DatabaseProbeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */; };
 		A57715B89B6B92A7E1A25EA7 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945DC676544C48CD305AAE63 /* AppModel.swift */; };
 		C4761E4C17E46DCC8D8FDFE5 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */; };
 		D5BDCF35E22FDE626C6C121B /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED5688AE3E55EFD5CFFA3FB /* UpdateService.swift */; };
-		D840BEE393D45254A2E020E7 /* HomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78841140DF5C461B20F4F1D /* HomeCard.swift */; };
+		D8B68C3DB79DCB25AAC976A6 /* LocationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171BBE34FD2FFFAA62A55F8 /* LocationCard.swift */; };
 		E12419CD5307F2BE3AA89A8E /* MenuBarPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */; };
 		EB8A47B99297F8F5916B8515 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0171BBE34FD2FFFAA62A55F8 /* LocationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCard.swift; sourceTree = "<group>"; };
 		401FF459517EF532CE1A3AAE /* SSDWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SSDWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49AC02F79A0B71C664405757 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPanel.swift; sourceTree = "<group>"; };
@@ -47,6 +48,7 @@
 		5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		65AA1A58E1F11E44C6DDE98F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		945DC676544C48CD305AAE63 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		956E64C84FB2E8E97768B2C9 /* StorageDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDiscovery.swift; sourceTree = "<group>"; };
 		9F1728992C48B32C99082921 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F807F4ADD3AF484156F780B /* DiscoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
 		AD31CCB733B57D68D162B318 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -55,10 +57,8 @@
 		B705892DFEF80D9A5BAC7330 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CD0766B9FD6BFE6B0E16FD37 /* SparklineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineView.swift; sourceTree = "<group>"; };
 		CED5688AE3E55EFD5CFFA3FB /* UpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
-		CFAB7A5E2E79DE5190E1A9F3 /* CodexHomeDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexHomeDiscovery.swift; sourceTree = "<group>"; };
 		D38CF77C8B11927E55E9CACA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D574A37AC887D2A228F6DA79 /* DatabaseProbeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProbeTests.swift; sourceTree = "<group>"; };
-		D78841140DF5C461B20F4F1D /* HomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCard.swift; sourceTree = "<group>"; };
 		DD590DE154B32289185852FA /* SSDWatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDWatcherApp.swift; sourceTree = "<group>"; };
 		FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProbe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +127,7 @@
 		5ECD32C79A0582FBD821A247 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D78841140DF5C461B20F4F1D /* HomeCard.swift */,
+				0171BBE34FD2FFFAA62A55F8 /* LocationCard.swift */,
 				4B8A7EAC309B0CAE53FE52EC /* MenuBarPanel.swift */,
 				5FDE7856FBA6E3F9AB19074F /* OnboardingView.swift */,
 				D38CF77C8B11927E55E9CACA /* SettingsView.swift */,
@@ -184,9 +184,9 @@
 		FB6D710F69402AF35169EA01 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				CFAB7A5E2E79DE5190E1A9F3 /* CodexHomeDiscovery.swift */,
 				FBF0743E8CBE73DD82102F3E /* DatabaseProbe.swift */,
 				AD31CCB733B57D68D162B318 /* Models.swift */,
+				956E64C84FB2E8E97768B2C9 /* StorageDiscovery.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -285,10 +285,9 @@
 			files = (
 				845120DACAC045E286695063 /* AppDelegate.swift in Sources */,
 				A57715B89B6B92A7E1A25EA7 /* AppModel.swift in Sources */,
-				943D71D84FCF924342E5E37D /* CodexHomeDiscovery.swift in Sources */,
 				91B01FC6CE37691B3B8A6832 /* DatabaseProbe.swift in Sources */,
 				6E3876F66DF0F071F49C3D80 /* DesignSystem.swift in Sources */,
-				D840BEE393D45254A2E020E7 /* HomeCard.swift in Sources */,
+				D8B68C3DB79DCB25AAC976A6 /* LocationCard.swift in Sources */,
 				E12419CD5307F2BE3AA89A8E /* MenuBarPanel.swift in Sources */,
 				3E65FCB3C56A7F8DE54B463E /* Models.swift in Sources */,
 				11C3A49AF1417675E9EA080D /* NotificationService.swift in Sources */,
@@ -296,6 +295,7 @@
 				6A729495AB5B5C398BDCA06A /* SSDWatcherApp.swift in Sources */,
 				1BACA71973F7E62B860A6F8E /* SettingsView.swift in Sources */,
 				52A9E7AD2912DB6BC067CF3E /* SparklineView.swift in Sources */,
+				1978411BD7C9D0EF75F733C7 /* StorageDiscovery.swift in Sources */,
 				D5BDCF35E22FDE626C6C121B /* UpdateService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
