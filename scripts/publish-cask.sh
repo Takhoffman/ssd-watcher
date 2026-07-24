@@ -5,13 +5,10 @@ set -euo pipefail
 repo_root=${0:A:h:h}
 cask_path=${1:-}
 tap_name=${HOMEBREW_TAP_NAME:-Takhoffman/tap}
+tap_git_url=${HOMEBREW_TAP_GIT_URL:-}
 
 if [[ -z $cask_path || ! -f $cask_path ]]; then
     print -u2 "Usage: scripts/publish-cask.sh <cask-path>"
-    exit 64
-fi
-if [[ -z ${HOMEBREW_TAP_TOKEN:-} ]]; then
-    print -u2 "HOMEBREW_TAP_TOKEN is required."
     exit 64
 fi
 
@@ -37,7 +34,9 @@ git -C "$tap_path" config \
     user.email "41898282+github-actions[bot]@users.noreply.github.com"
 git -C "$tap_path" add Casks/ssd-watcher.rb
 git -C "$tap_path" commit -m "Update SSD Watcher to $version"
-GH_TOKEN=$HOMEBREW_TAP_TOKEN gh auth setup-git
-git -C "$tap_path" push
+if [[ -n $tap_git_url ]]; then
+    git -C "$tap_path" remote set-url origin "$tap_git_url"
+fi
+git -C "$tap_path" push origin HEAD:main
 
 print "Published SSD Watcher $version to $tap_name."

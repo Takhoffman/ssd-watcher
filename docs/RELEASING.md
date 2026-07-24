@@ -18,7 +18,8 @@ Every public build has three independent checks:
    notes before extraction.
 
 The repository contains the Sparkle public key. Its private key stays in the
-macOS Keychain or in encrypted GitHub Actions secrets.
+macOS Keychain or in the protected `release` environment's encrypted GitHub
+Actions secrets.
 
 ## One-time GitHub setup
 
@@ -73,8 +74,8 @@ offline once:
   -x /secure/offline/location/ssd-watcher-sparkle-private-key
 ```
 
-That file is as sensitive as a password. Never add it to Git, cloud storage, a
-release, or an issue.
+That file is as sensitive as a password. Never add it to Git, unencrypted cloud
+storage, a release, or an issue.
 
 ## Release secrets
 
@@ -86,12 +87,25 @@ The release workflow expects:
 - `APP_STORE_CONNECT_ISSUER_ID`
 - `APP_STORE_CONNECT_PRIVATE_KEY`
 - `SPARKLE_PRIVATE_KEY`
-- `HOMEBREW_TAP_TOKEN` (optional but recommended)
+- `HOMEBREW_TAP_DEPLOY_KEY` (optional but recommended)
 
 `SPARKLE_PRIVATE_KEY` is the exact exported key-file content, not an additional
-base64 encoding of it. `HOMEBREW_TAP_TOKEN` should be a fine-grained personal
-access token with **Contents: read and write** access to only
-`Takhoffman/homebrew-tap`.
+base64 encoding of it. `HOMEBREW_TAP_DEPLOY_KEY` should be the private half of
+a dedicated SSH key whose public half is installed as a write-enabled deploy
+key on only `Takhoffman/homebrew-tap`. Do not reuse a personal SSH key.
+
+Create that dedicated key with:
+
+```sh
+ssh-keygen -t ed25519 -N "" \
+  -C "ssd-watcher-homebrew-tap" \
+  -f /secure/temporary/location/ssd-watcher-homebrew-tap
+```
+
+Add the `.pub` file under the tap repository's **Settings → Deploy keys** with
+write access, and store the private file as `HOMEBREW_TAP_DEPLOY_KEY` in the
+source repository's `release` environment. After confirming the secret works,
+remove the temporary files or keep one encrypted offline recovery copy.
 
 Release secrets are used only after the public verification job passes and
 must never be added to pull-request workflows.
