@@ -121,6 +121,7 @@ xcrun stapler validate "$dmg_path"
 
 sparkle_tools="$derived_data/SourcePackages/artifacts/sparkle/Sparkle/bin"
 update_source="$temporary_path/updates"
+appcast_path="$update_source/appcast.xml"
 mkdir -p "$update_source"
 cp "$zip_path" "$update_source/$zip_name"
 
@@ -133,7 +134,7 @@ appcast_arguments=(
     --download-url-prefix "https://github.com/Takhoffman/ssd-watcher/releases/download/v$version/"
     --link "https://github.com/Takhoffman/ssd-watcher"
     --embed-release-notes
-    -o appcast.xml
+    -o "$appcast_path"
 )
 if [[ -n ${SPARKLE_PRIVATE_KEY_FILE:-} ]]; then
     [[ -r $SPARKLE_PRIVATE_KEY_FILE ]] || {
@@ -149,7 +150,11 @@ else
     "$sparkle_tools/generate_appcast" "${appcast_arguments[@]}" "$update_source"
 fi
 
-cp "$update_source/appcast.xml" "$dist_path/appcast.xml"
+[[ -s $appcast_path ]] || {
+    print -u2 "Sparkle did not produce a non-empty appcast at $appcast_path"
+    exit 1
+}
+cp "$appcast_path" "$dist_path/appcast.xml"
 
 mkdir -p "$dist_path/Casks"
 "$repo_root/scripts/render-cask.sh" "$version" "$dmg_path" "$dist_path/Casks/ssd-watcher.rb"
