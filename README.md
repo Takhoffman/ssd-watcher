@@ -1,8 +1,6 @@
 # SSD Watcher
 
-<p align="center">
-  <img src="SSDWatcher/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-128.png" width="96" alt="SSD Watcher app icon">
-</p>
+![SSD Watcher monitors several Codex database locations and protects an SSD from abnormal write activity](docs/images/ssd-watcher-hero.png)
 
 SSD Watcher is a native macOS menu-bar utility that detects abnormal disk-write
 activity before it quietly consumes storage endurance.
