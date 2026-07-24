@@ -78,7 +78,7 @@ bundle_build=$(
     print -u2 "Exported build $bundle_build does not match $build_number"
     exit 1
 }
-lipo -verify_arch arm64 x86_64 "$app_path/Contents/MacOS/SSDWatcher"
+lipo "$app_path/Contents/MacOS/SSDWatcher" -verify_arch arm64 x86_64
 
 mkdir -p "$dist_path"
 find "$dist_path" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
